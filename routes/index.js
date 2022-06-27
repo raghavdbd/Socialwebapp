@@ -5,6 +5,6 @@ const router = express.Router();
 // noe we acesses function which we want to acesses
 const homecontroller=require('../controller/home_controller')
 router.get('/',homecontroller.home);
-
-
+router.use('/users',require('./user'));
+router.use('/post',require('./posts'))
 module.exports=router;
