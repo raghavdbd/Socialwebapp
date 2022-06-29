@@ -3,6 +3,8 @@ const app = express()
 const port = 8000;
 // we are initializing express-ejs-layouts
 const expresslayouts=require('express-ejs-layouts');
+// now we setting up mongodb
+const db=require('./config/mongoose');
 // we are telling app to use it
 app.use(express.static('./assets'));
 app.use(expresslayouts);
