@@ -1,10 +1,17 @@
 const express = require('express')
+const cookieparser= require('cookie-parser');
 const app = express()
+// 
 const port = 8000;
+// initialize cokie parser
+
 // we are initializing express-ejs-layouts
 const expresslayouts=require('express-ejs-layouts');
 // now we setting up mongodb
 const db=require('./config/mongoose');
+
+app.use(express.urlencoded({ extended: true }));
+app.use(cookieparser());
 // we are telling app to use it
 app.use(express.static('./assets'));
 app.use(expresslayouts);
