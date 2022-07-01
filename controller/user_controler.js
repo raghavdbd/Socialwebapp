@@ -1,7 +1,26 @@
 const User=require('../model/user');
 
 module.exports.profile=function(req,res){
-    res.end('<h1>user profile</h1>');
+    if(req.cookies.user_id){
+        User.findById(req.cookies.user_id,function(err,user){
+            // if(err){
+            //     console.log('error in finding user')
+            // }
+            if(user){
+                return res.render('user_profile',{
+                    title:"User profile",
+                    user:user
+                })
+
+
+            }
+                return res.redirect('/');
+            
+        })
+    }else{
+        return res.redirect('/users/sign-in');
+    }
+   
 }
 module.exports.signup=function(req,res){
     res.render('user_sign_up',{
@@ -51,6 +70,7 @@ module.exports.createSession=function(req,res){
                 return res.redirect('back');
 
             }
+            res.cookie('user_id',user.id);
 return res.redirect('/users/profile');
             
         }else{
