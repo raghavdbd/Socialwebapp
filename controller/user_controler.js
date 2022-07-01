@@ -38,3 +38,24 @@ module.exports.create=function(req,res){
 
     })
 }
+module.exports.createSession=function(req,res){
+    User.findOne({email:req.body.email},function(err,user){
+        if(err){
+            console.log("error in creating user");
+            return;
+
+        }
+        if(user){
+            // handle password not match
+            if(req.body.password!=user.password){
+                return res.redirect('back');
+
+            }
+return res.redirect('/users/profile');
+            
+        }else{
+            return res.redirect('back');
+        }
+    })
+
+}
