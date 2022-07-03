@@ -14,7 +14,7 @@ const session=require('express-session');
 const passport=require('passport');
 const LocalStrategy=require('./config/passport-local-Strategy')
 
-app.use(express.urlencoded({ extended: true }));
+app.use(express.urlencoded( ));
 app.use(cookieparser());
 // we are telling app to use it
 app.use(express.static('./assets'));
@@ -22,7 +22,7 @@ app.use(expresslayouts);
 // for extracting style and script
 app.set('layout extractStyles',true);
 app.set('layout extractScripts',true)
-app.use('/',require('./routes'));
+
 app.get('/', (req, res) => {
   res.send('Hello World!')
 })
@@ -41,6 +41,8 @@ app.use(session({
 }));
 app.use(passport.initialize() );
 app.use(passport.session());
+app.use(passport.setAuthenticatedUser);
+app.use('/',require('./routes'));
 app.listen(port, function(err) {
   console.log(`Example app listening on port ${port}`)
 })
