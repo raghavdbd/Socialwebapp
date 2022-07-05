@@ -1,18 +1,21 @@
 const passport=require('passport');
-const LocalStrategy=require('passport-local').Strategy;
+const LocalStrategy=require('passport-local');
 
 
 const User=require('../model/user');
 passport.use(new LocalStrategy({
-usernamefield:"email" 
+usernameField:"email" 
 },
     function(email, password, done) {
       User.findOne({ email: email }, function (err, user) {
-        if (err) { return done(err); }
-        if (!user) { return done(null, false); }
-        if (!user.verifyPassword(password)) {
+        if (err) {
+          console.log("err");
+           return done(err); }
+        
+        if (!user || user.password != password) {
             console.log('Invalid password')
-            return done(null, false); }
+            return done(null, false);
+           }
         return done(null, user);
       });
     }
@@ -36,8 +39,11 @@ passport.deserializeUser(function(id,done){
 passport.checkAuthentication = function(req, res, next){
   // if the user is signed in, then pass on the request to the next function(controller's action)
   if (req.isAuthenticated()){
+    console.log("abc");
       return next();
+    
   }
+  console.log("aaaa");
 
   // if the user is not signed in
   return res.redirect('/users/sign-in');
