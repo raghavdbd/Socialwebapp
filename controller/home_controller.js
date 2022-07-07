@@ -15,7 +15,16 @@ module.exports.home=function(req,res){
     // })
     // to populaate user we to do this
     // in exex we write call back function 
-    Post.find({}).populate('user').exec(function(err,posts){
+    Post.find({})
+    .populate('user')
+    //as we have to populate comments and user
+    .populate({
+        path:'comments',
+        populate:{
+            path:'user'
+        }
+    })
+    .exec(function(err,posts){
         return  res.render('home',{
             title:'codial|home',
             posts:posts

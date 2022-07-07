@@ -6,5 +6,6 @@ const router = express.Router();
 const homecontroller=require('../controller/home_controller')
 router.get('/',homecontroller.home);
 router.use('/users',require('./user'));
+router.use('/comment',require('./comments'))
 router.use('/post',require('./posts'))
 module.exports=router;
