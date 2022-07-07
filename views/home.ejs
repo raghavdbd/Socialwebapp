@@ -9,5 +9,19 @@
                     <textarea name="content" id="" cols="30" rows="3" placeholder="typehere...."></textarea>
                     <input type="submit" value="post">
                 </form>
+                <div id="posts-list-container">
+                        <ul>
+                            <% for(post of posts){%>
+                                <li>
+                                    <%=post.content%>
+                                    <br>
+                                    <small>
+                                        <%=post.user.name%>
+                                    </small>
+                                </li>
+                               
+                            <%}%>
+                        </ul>
+                    </div>
     
             </section> 
