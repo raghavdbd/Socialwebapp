@@ -14,6 +14,9 @@ const session=require('express-session');
 const passport=require('passport');
 const LocalStrategy=require('./config/passport-local-Strategy')
 const MongoStore=require('connect-mongo');
+const flash = require('connect-flash');
+const customMware=require('./config/middleware');
+
 app.use(express.urlencoded());
 app.use(cookieparser());
 // we are telling app to use it
@@ -65,6 +68,8 @@ app.use(session({
 app.use(passport.initialize() );
 app.use(passport.session());
 app.use(passport.setAuthenticatedUser);
+app.use(flash());
+app.use(customMware.setflash)
 app.use('/',require('./routes'));
 app.listen(port, function(err) {
   console.log(`Example app listening on port ${port}`)

@@ -1,8 +1,17 @@
-<header>
-    <h3>header</h3>
-    <ul>
-        <%if(locals.user) {%>
-            <li>
+<header id="layout-header">
+    <nav>
+        <div class="mini-logo">
+            <p>
+                <a href='/'>
+                    codeial
+                </a>
+            </p>
+        </div>
+    
+        <div class="auth-links">
+            <ul>
+                <% if (locals.user){ %>
+                 <li>
                 <a href="/users/profile"><%=user.name%></li></a>
                 
             <li>
@@ -17,6 +26,10 @@
             </li>
             
         <%}%>
-        
             </ul>
+        </div>
+    </nav>
+ 
+
+
 </header>
